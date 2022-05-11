@@ -1,0 +1,44 @@
+﻿<h1>Animal Roster</h1>
+
+@if (ViewBag.animals.Count == 0)
+{
+    <p>Roster currently empty!</p>
+}
+else
+{
+    <a asp-controller="Animal" asp-action="Delete">Send Animals Home</a>
+    <table class="table">
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Species
+            </th>
+            <th>
+                Description
+            </th>
+        </tr>
+
+        @foreach (var animal in ViewBag.animals)
+        {
+            <tr>
+                <td>
+                    @animal.Id
+                </td>
+                <td>
+                    @animal.Name
+                </td>
+                <td>
+                    @animal.Species
+                </td>
+                <td>
+                    @animal.Description
+                </td>
+            </tr>
+        }
+    </table>
+}

@@ -1,0 +1,16 @@
+﻿<h1>Send Animals Home</h1>
+
+<form method="post">
+   @foreach (var animal in ViewBag.animals)
+   {
+      <div class="form-group">
+            <label>
+               <span>@animal.Name</span>
+               <input type="checkbox" name="animalIds" value="@animal.Id" class="form-control">
+            </label>
+      </div>
+   }
+
+   <input type="submit" value="Send Selected Animals Home" class="btn btn-danger">
+
+</form>
