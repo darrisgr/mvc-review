@@ -60,9 +60,27 @@ namespace mvc_review.Controllers
         }
 
         [HttpPost("animals/{id}/editname")]
-        public IActionResult Edit(int id, string name)
+        public IActionResult NewName(int id, string name)
         {
             AnimalData.ChangeName(id, name);
+
+            return Redirect("/animals");
+        }
+
+        [HttpGet("/animals/{id}/editdescription")]
+        public IActionResult EditDescription(int id)
+        {
+            ViewBag.selectedAnimal = AnimalData.GetById(id);
+
+            ViewBag.description = $"{AnimalData.GetById(id).Description}'s";
+
+            return View();
+        }
+
+        [HttpPost("animals/{id}/editdescription")]
+        public IActionResult NewDescription(int id, string description)
+        {
+            AnimalData.ChangeDescription(id, description);
 
             return Redirect("/animals");
         }

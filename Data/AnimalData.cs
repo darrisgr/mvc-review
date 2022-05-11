@@ -39,5 +39,10 @@ namespace mvc_review.Data
         {
             Animals[id].Name = newName;
         }
+
+        public static void ChangeDescription(int id, string newDescription)
+        {
+            Animals[id].Description = newDescription;
+        }
     }
 }
