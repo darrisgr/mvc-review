@@ -47,5 +47,24 @@ namespace mvc_review.Controllers
 
             return Redirect("/animals");
         }
+
+        // GET: "/animals/edit/{id}"
+        [HttpGet("/animals/{id}/editname")]
+        public IActionResult EditName(int id)
+        {
+            ViewBag.selectedAnimal = AnimalData.GetById(id);
+
+            ViewBag.name = $"{AnimalData.GetById(id).Name}'s";
+
+            return View();
+        }
+
+        [HttpPost("animals/{id}/editname")]
+        public IActionResult Edit(int id, string name)
+        {
+            AnimalData.ChangeName(id, name);
+
+            return Redirect("/animals");
+        }
     }
 }

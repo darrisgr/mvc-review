@@ -33,5 +33,11 @@ namespace mvc_review.Data
         // edit animal name
         // public static void ChangeName(int id, string newName)
         // Animals[id].Name = newName;
+
+        // EditName
+        public static void ChangeName(int id, string newName)
+        {
+            Animals[id].Name = newName;
+        }
     }
 }
