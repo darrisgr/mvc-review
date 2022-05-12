@@ -30,13 +30,13 @@ else
                     @animal.Id
                 </td>
                 <td>
-                    @animal.Name
+                    @animal.Name - <a asp-controller="Animal" asp-action="EditName" asp-route-id="@animal.Id">Edit</a>
                 </td>
                 <td>
                     @animal.Species
                 </td>
                 <td>
-                    @animal.Description
+                    @animal.Description - <a asp-controller="Animal" asp-action="EditDescription" asp-route-id="@animal.Id">Edit</a>
                 </td>
             </tr>
         }
