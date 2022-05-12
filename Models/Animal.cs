@@ -6,7 +6,6 @@ namespace mvc_review.Models
     {
         public string Name { get; set; }
         public string Species { get; set; }
-        [FromForm(Name="desc")]
         public string Description { get; set; }
         public int Id { get; }
         private static int nextId = 1;
