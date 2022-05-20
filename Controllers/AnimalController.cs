@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using mvc_review.Models;
 using mvc_review.Data;
+using mvc_review.ViewModels;
 
 namespace mvc_review.Controllers
 {
@@ -10,26 +12,37 @@ namespace mvc_review.Controllers
         // GET: "/animal/index"
         public IActionResult Index()
         {
-            ViewBag.animals = AnimalData.GetAll();
+            List<Animal> animals = new List<Animal>(AnimalData.GetAll());
 
-            return View();
+            return View(animals);
         }
 
-        [HttpGet("/animals/add")]
         public IActionResult Add()
         {
-            return View();
+            AddAnimalViewModel addAnimalViewModel = new AddAnimalViewModel();
+            return View(addAnimalViewModel);
         }
 
-        [HttpPost("animals/add")]
-        public IActionResult NewAnimal(Animal newAnimal)
+        [HttpPost]
+        public IActionResult Add(AddAnimalViewModel addAnimalViewModel)
         {
-            AnimalData.Add(newAnimal);
+           if (ModelState.IsValid)
+            {
+                Animal newAnimal = new Animal
+                {
+                    Name = addAnimalViewModel.Name,
+                    Species = addAnimalViewModel.Species,
+                    Description = addAnimalViewModel.Description
+                };
 
-            return Redirect("/animals");
+                AnimalData.Add(newAnimal);
+
+                return Redirect("/animals");
+            }
+
+            return View(addAnimalViewModel);
         }
-
-        [HttpGet("/animals/delete")]
+        
         public IActionResult Delete()
         {
             ViewBag.animals = AnimalData.GetAll();
@@ -37,8 +50,8 @@ namespace mvc_review.Controllers
             return View();
         }
 
-        [HttpPost("animals/delete")]
-        public IActionResult SendHome(int[] animalIds)
+        [HttpPost]
+        public IActionResult Delete(int[] animalIds)
         {
             foreach (int animalId in animalIds)
             {
@@ -84,5 +97,9 @@ namespace mvc_review.Controllers
 
             return Redirect("/animals");
         }
+    }
+
+    internal class AddEventViewModel
+    {
     }
 }
